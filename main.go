@@ -10,12 +10,12 @@ import (
 func main() {
 	App := app.NewApp()
 
-	App.Router.POST("/graphql", func(c *gin.Context) {
+	App.Router.POST("/api/v1/graphql", func(c *gin.Context) {
 		App.Srv.ServeHTTP(c.Writer, c.Request)
 	})
 
 	App.Router.GET("/", func(c *gin.Context) {
-		playground.Handler("GraphQL", "/graphql").ServeHTTP(c.Writer, c.Request)
+		playground.Handler("GraphQL", "/api/v1/graphql").ServeHTTP(c.Writer, c.Request)
 	})
 
 	App.Router.Run()

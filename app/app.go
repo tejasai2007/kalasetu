@@ -56,7 +56,9 @@ func NewApp() *App {
 	refreshTokenRepo := repos.NewRefreshTokenRepository(db)
 	authService := services.NewAuthService(userRepo, refreshTokenRepo)
 	authHandler := handlers.NewAuthHandler(authService)
-	routes.RegisterAuthRoutes(r, authHandler)
+	
+	apiV1 := r.Group("/api/v1")
+	routes.RegisterAuthRoutes(apiV1, authHandler)
 
 	resolver := &graph.Resolver{}
 	srv := gqlSetup(resolver)
